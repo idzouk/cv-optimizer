@@ -229,6 +229,30 @@ test('the template leaves no placeholder behind, whatever the slots hold', () =>
   }
 });
 
+test('contacts: the GitHub link sits right after LinkedIn, in both variants, and only when set', () => {
+  const render = (format, github) => {
+    const cv = makeCvForHtml();
+    if (github !== undefined) cv.personal.github = github;
+    return buildCvHtml(cv, {
+      format,
+      analysis: null,
+      rewrite: null,
+      lang: 'fr',
+      translated: null,
+      websiteMode: 'show',
+      jobOffer: '',
+      templatePath: TEMPLATE_PATH,
+    });
+  };
+  for (const format of ['ats', 'design']) {
+    const out = render(format, 'github.com/x');
+    assert.match(out, /linkedin\.com\/in\/x<\/a>[\s\S]{0,1200}?<a href="https:\/\/github\.com\/x">github\.com\/x<\/a>/);
+    for (const empty of [undefined, null, '']) {
+      assert.doesNotMatch(render(format, empty), /github/i);
+    }
+  }
+});
+
 /* ------------------------------------------------------------------ *
  * Une page garantie — bloc 10
  * ------------------------------------------------------------------ */
