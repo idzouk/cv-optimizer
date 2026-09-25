@@ -14,8 +14,6 @@ This tool generates a tailored one-page CV from a single source of truth (master
 4. Scores the CV before and after tailoring
 5. Exports a one-page PDF, designed or ATS-friendly, in French or English
 
-Example output: [a generated CV](docs/example-cv.pdf) (fictional candidate)
-
 ## Why it's built this way
 A CV that invents a skill is worse than no CV. So the master CV is the only source of truth: locked fields are never rewritten, internal notes are never printed, and translations are checked for overclaiming.
 
