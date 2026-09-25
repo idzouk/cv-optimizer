@@ -1,6 +1,6 @@
 {
   "_readme": "CV entièrement fictif, fourni pour essayer l'outil. Copie-le en master-cv.json et remplace son contenu par le tien. Préfixe une valeur par '[FIXE] ' pour la rendre intouchable : l'outil la recopie telle quelle et interdit au modèle de la réécrire. Les listes 'realisations' et 'competences' sont des RÉSERVES de matière vraie : l'outil y sélectionne ce qui colle à l'offre, il n'invente rien en dehors. 'age' et 'permis' sont masqués par défaut : le permis ne s'affiche que si l'offre mentionne des déplacements. Le champ 'contexte' (expériences et projets) contient des consignes pour l'outil : il n'est jamais imprimé sur le CV.",
-  "titre": "[FIXE] Consultante IA · Growth",
+  "titre": "[FIXE] Media Buyer · Outils IA",
   "personal": {
     "name": "[FIXE] Camille Rivet",
     "email": "[FIXE] camille.rivet@example.com",
@@ -14,19 +14,19 @@
     "disponibilite": "Disponible en CDI",
     "photo": null
   },
-  "profil": "Consultante growth qui construit ses propres outils IA. En agence, j'ai piloté 30 000 €/mois de budget paid social pour des marques retail et accéléré le reporting client. En parallèle, je conçois des outils avec l'API Claude, comme un assistant de veille concurrentielle construit de bout en bout.",
+  "profil": "Media buyer qui construit ses propres outils IA. En agence, j'ai piloté 30 000 €/mois de budget paid social pour des marques retail et accéléré le reporting client. En parallèle, je conçois des outils avec l'API Claude, comme un assistant de veille concurrentielle construit de bout en bout.",
   "profil_variants": [
     {
       "angle": "ai_deployment",
-      "texte": "Je construis des outils IA pour les problèmes que je rencontre au travail, puis je les mets en production. En agence, un agent de reporting a réduit de 6 h à 1 h par semaine la préparation des bilans clients."
+      "texte": "Je construis des outils IA pour les problèmes que je rencontre au travail, et je les fais adopter : en agence, un agent d'analyse de campagne a ramené de 6 h à 1 h par semaine la préparation des bilans clients."
     },
     {
       "angle": "implementation_ia",
-      "texte": "Je conçois et déploie des outils IA avec l'API Claude, comme un assistant de veille concurrentielle construit de bout en bout."
+      "texte": "Je conçois des outils IA avec l'API Claude, comme un assistant de veille concurrentielle construit de bout en bout."
     },
     {
       "angle": "conseil_ia",
-      "texte": "Consultante en transformation IA, diplômée d'un Master Management de l'Innovation. Sur une mission pour le Groupe Hestia Restauration, j'ai cartographié 18 cas d'usage IA et construit la feuille de route associée."
+      "texte": "Formée au conseil en transformation IA (Master Management de l'Innovation, spécialisation IA appliquée). Sur un projet de conseil de Master pour le Groupe Hestia Restauration, notre équipe de 4 a cartographié 18 cas d'usage IA et construit la feuille de route associée."
     },
     {
       "angle": "paid_social",
@@ -34,7 +34,7 @@
     },
     {
       "angle": "builder_growth",
-      "texte": "Profil growth qui code : je pilote des campagnes paid social et je construis les outils qui les rendent plus rapides à analyser, du reporting automatisé aux assistants de veille."
+      "texte": "Media buyer qui code : je pilote des campagnes paid social et je construis les outils qui les rendent plus rapides à analyser, d'un agent qui accélère le reporting à un assistant de veille concurrentielle."
     }
   ],
   "experiences": [
@@ -102,19 +102,19 @@
   ],
   "competences": [
     "Prototypage et mise en production d'outils IA (workflows LLM, agents)",
-    "Conception de prompts et de sorties structurées (JSON)",
+    "Conception de prompts pour des outils LLM",
     "Pilotage de campagnes paid social (Meta, TikTok, Pinterest)",
     "Analyse de performance et reporting client",
-    "Automatisation de workflows (Zapier, Make)",
+    "Automatisation de workflows (Zapier)",
     "Cartographie et priorisation de cas d'usage IA",
     "Tests A/B et optimisation créative",
     "Gestion de la relation client",
     "Étude de marché et business plan"
   ],
   "outils": [
-    { "label": "LLMs & GenAI", "valeur": "Claude · ChatGPT · Mistral" },
-    { "label": "Dev & Automation", "valeur": "Node.js (Express) · API Anthropic · Zapier · Make" },
-    { "label": "Ads & Analytics", "valeur": "Meta Ads Manager · TikTok Ads · Pinterest Ads · Looker Studio · GA4" },
+    { "label": "LLMs & GenAI", "valeur": "Claude" },
+    { "label": "Dev & Automation", "valeur": "Node.js (Express) · API Anthropic · Zapier" },
+    { "label": "Ads", "valeur": "Meta Ads Manager · TikTok Ads · Pinterest Ads" },
     { "label": "Bureautique", "valeur": "Google Workspace · Excel · Notion" }
   ],
   "langues": [
