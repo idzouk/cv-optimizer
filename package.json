@@ -1,0 +1,17 @@
+{
+  "name": "cv-optimizer",
+  "version": "1.0.0",
+  "description": "Generates a tailored, ATS-optimized CV PDF from a pasted job offer using the Anthropic API + Puppeteer.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "puppeteer": "^25.3.0"
+  },
+  "private": true
+}

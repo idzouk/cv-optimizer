@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
+.claude/
+
+# Personal data — never committed
+master-cv.json
+generations.json
+applications.json
+outputs/

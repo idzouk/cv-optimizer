@@ -1,0 +1,166 @@
+{
+  "_readme": "CV entièrement fictif, fourni pour essayer l'outil. Copie-le en master-cv.json et remplace son contenu par le tien. Préfixe une valeur par '[FIXE] ' pour la rendre intouchable : l'outil la recopie telle quelle et interdit au modèle de la réécrire. Les listes 'realisations' et 'competences' sont des RÉSERVES de matière vraie : l'outil y sélectionne ce qui colle à l'offre, il n'invente rien en dehors. 'age' et 'permis' sont masqués par défaut : le permis ne s'affiche que si l'offre mentionne des déplacements. Le champ 'contexte' (expériences et projets) contient des consignes pour l'outil : il n'est jamais imprimé sur le CV.",
+  "titre": "[FIXE] Consultante IA · Growth",
+  "personal": {
+    "name": "[FIXE] Camille Rivet",
+    "email": "[FIXE] camille.rivet@example.com",
+    "phone": "[FIXE] +33 6 39 98 00 00",
+    "location": "Lyon, Auvergne-Rhône-Alpes",
+    "linkedin": "[FIXE] linkedin.com/in/camille-rivet-example",
+    "website": "[FIXE] camille-rivet.example.com",
+    "github": null,
+    "age": "26 ans",
+    "permis": "Permis B",
+    "disponibilite": "Disponible en CDI",
+    "photo": null
+  },
+  "profil": "Consultante growth qui construit ses propres outils IA. En agence, j'ai piloté 30 000 €/mois de budget paid social pour des marques retail et automatisé le reporting client. En parallèle, je conçois des applications avec l'API Claude, du prototype à la mise en ligne.",
+  "profil_variants": [
+    {
+      "angle": "ai_deployment",
+      "texte": "Je construis des outils IA pour les problèmes que je rencontre au travail, puis je les mets en production. En agence, un agent de reporting a réduit de 6 h à 1 h par semaine la préparation des bilans clients."
+    },
+    {
+      "angle": "implementation_ia",
+      "texte": "Je conçois et déploie des outils IA avec l'API Claude : un assistant de veille concurrentielle en ligne et un outil d'aide à la rédaction d'appels d'offres, tous deux construits de bout en bout."
+    },
+    {
+      "angle": "conseil_ia",
+      "texte": "Consultante en transformation IA, diplômée d'un Master Management de l'Innovation. Sur une mission pour le Groupe Hestia Restauration, j'ai cartographié 18 cas d'usage IA et construit la feuille de route associée."
+    },
+    {
+      "angle": "paid_social",
+      "texte": "Media buyer avec 2 ans de pilotage de comptes retail et lifestyle (Maison Orée, Lune & Sel, Vélo Rivière) : 30 000 €/mois de budget géré sur Meta, TikTok et Pinterest."
+    },
+    {
+      "angle": "builder_growth",
+      "texte": "Profil growth qui code : je pilote des campagnes paid social et je construis les outils qui les rendent plus rapides à analyser, du reporting automatisé aux assistants de veille."
+    }
+  ],
+  "experiences": [
+    {
+      "id": "brume",
+      "titre": "[FIXE] Media Buyer",
+      "entreprise": "[FIXE] Atelier Brume",
+      "entreprise_url": null,
+      "type": "Alternance",
+      "lieu": "Lyon",
+      "periode": "[FIXE] Septembre 2024 — Août 2026",
+      "contexte": "Agence média indépendante. Clients retail et lifestyle (Maison Orée, Lune & Sel, Vélo Rivière). Ne pas présenter l'agent de reporting comme une automatisation complète : il accélère le reporting, il ne le remplace pas.",
+      "realisations": [
+        "Pilotage de campagnes paid social multi-plateformes (Meta, TikTok, Pinterest) pour 3 marques retail, avec 30 000 €/mois de budget géré.",
+        "Mise en place d'un agent IA d'analyse des performances de campagne : préparation des bilans clients ramenée de 6 h à 1 h par semaine.",
+        "Hausse du ROAS de 2,1 à 3,4 en 6 mois sur le compte Maison Orée grâce à une refonte de la structure de campagnes.",
+        "Interlocutrice directe des équipes marketing clients : points hebdomadaires et recommandations d'optimisation.",
+        "Automatisation des brouillons d'emails de reporting via Zapier.",
+        "Tests créatifs structurés (A/B) sur 40 variantes publicitaires par trimestre."
+      ]
+    },
+    {
+      "id": "veloce",
+      "titre": "Co-fondatrice",
+      "entreprise": "Veloce",
+      "entreprise_url": null,
+      "type": "Startup étudiante incubée",
+      "lieu": "Grenoble",
+      "periode": "Septembre 2022 — Juin 2023",
+      "contexte": "Projet de location de vélos cargo entre particuliers, arrêté après la phase de test.",
+      "realisations": [
+        "Co-fondation du projet : business model, business plan et pitch devant un jury d'incubateur.",
+        "Étude de marché auprès de 120 familles du quartier pilote.",
+        "Test terrain avec 15 vélos cargo pendant 3 mois, puis décision argumentée d'arrêter le projet."
+      ]
+    },
+    {
+      "id": "parallele",
+      "titre": "Assistante Chef de Projet",
+      "entreprise": "Studio Parallèle",
+      "entreprise_url": null,
+      "type": "Agence de communication · Stage",
+      "lieu": "Lyon",
+      "periode": "Janvier 2022 — Juin 2022",
+      "contexte": "Agence de communication. Clients suivis : Fromagerie Aubrac, Vélo Rivière.",
+      "realisations": [
+        "Suivi de production de campagnes print et digitales pour 2 clients (Fromagerie Aubrac, Vélo Rivière).",
+        "Premier usage de l'IA générative dans l'agence : génération de pistes de slogans pour les brainstormings."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "diplome": "[FIXE] Master Management de l'Innovation",
+      "ecole": "[FIXE] École de Commerce de Rivemont",
+      "periode": "[FIXE] 2024 — 2026",
+      "detail": "Spécialisation Transformation digitale & IA appliquée · Programme en alternance"
+    },
+    {
+      "diplome": "[FIXE] Licence Économie-Gestion",
+      "ecole": "[FIXE] Université de Rivemont",
+      "periode": "[FIXE] 2020 — 2023",
+      "detail": "Parcours Marketing · Semestre d'échange à Valencia"
+    }
+  ],
+  "competences": [
+    "Prototypage et mise en production d'outils IA (workflows LLM, agents)",
+    "Conception de prompts et de sorties structurées (JSON)",
+    "Pilotage de campagnes paid social (Meta, TikTok, Pinterest)",
+    "Analyse de performance et reporting client",
+    "Automatisation de workflows (Zapier, Make)",
+    "Cartographie et priorisation de cas d'usage IA",
+    "Tests A/B et optimisation créative",
+    "Gestion de la relation client",
+    "Étude de marché et business plan"
+  ],
+  "outils": [
+    { "label": "LLMs & GenAI", "valeur": "Claude · ChatGPT · Mistral" },
+    { "label": "Dev & Automation", "valeur": "Node.js (Express) · API Anthropic · Zapier · Make" },
+    { "label": "Ads & Analytics", "valeur": "Meta Ads Manager · TikTok Ads · Pinterest Ads · Looker Studio · GA4" },
+    { "label": "Bureautique", "valeur": "Google Workspace · Excel · Notion" }
+  ],
+  "langues": [
+    { "nom": "[FIXE] Français", "niveau": "[FIXE] C2 — Natif" },
+    { "nom": "[FIXE] Anglais", "niveau": "[FIXE] C1 — Courant" },
+    { "nom": "[FIXE] Espagnol", "niveau": "[FIXE] B2" }
+  ],
+  "interets": [
+    "Escalade",
+    "Photographie argentique"
+  ],
+  "projets": [
+    {
+      "id": "veille",
+      "type": "build",
+      "nom": "[FIXE] Radar Concurrents",
+      "nom_en": "Competitor Radar",
+      "sous_titre": "Application web personnelle, Node.js / Express, API Claude",
+      "lien": null,
+      "description": "Collecte chaque semaine les publications de 12 marques concurrentes et en tire un brief sourcé : nouveautés produit, messages clés et angles publicitaires, chaque point renvoyant à sa source.",
+      "description_courte": "Brief concurrentiel hebdomadaire sourcé, généré via l'API Claude"
+    },
+    {
+      "id": "hestia",
+      "type": "conseil",
+      "nom": "[FIXE] Groupe Hestia Restauration",
+      "nom_en": "Hestia Restaurant Group",
+      "sous_titre": "Projet de conseil en équipe de 4, Master",
+      "lien": null,
+      "periode": "[FIXE] 2025",
+      "contexte": "Mission de conseil étudiante pour un groupe de restauration. 2 réalisations maximum sur le CV.",
+      "realisations": [
+        "Cartographie de 18 cas d'usage IA sur 4 métiers (achats, RH, marketing, opérations), priorisés selon la valeur et la faisabilité.",
+        "Construction d'une feuille de route IA sur 18 mois, restituée au comité de direction.",
+        "Conception d'un tableau de bord de 12 indicateurs pour suivre l'adoption des outils IA."
+      ]
+    },
+    {
+      "id": "site-perso",
+      "type": "build",
+      "nom": "[FIXE] Site personnel",
+      "nom_en": "Personal Website",
+      "sous_titre": "Portfolio statique",
+      "lien": "https://camille-rivet.example.com",
+      "description": "Portfolio présentant projets et études de cas.",
+      "description_courte": "Portfolio de projets"
+    }
+  ]
+}

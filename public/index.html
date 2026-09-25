@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV Optimizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<!-- Loaded after CodeMirror's own stylesheet so our token-color overrides
+     (same specificity, .master-editor .cm-property etc.) win the cascade. -->
+<link rel="stylesheet" href="/style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand-group">
+    <div class="brand">CV Optimizer<span class="version-tag"> v4</span></div>
+    <nav class="view-tabs" id="view-tabs" role="tablist" aria-label="Vue">
+      <button type="button" class="view-tab is-active" data-view="generate" role="tab" aria-selected="true">Générer</button>
+      <button type="button" class="view-tab" data-view="tracking" role="tab" aria-selected="false">Suivi <span class="view-tab-count" id="tracking-count" hidden>0</span></button>
+    </nav>
+  </div>
+  <div class="topbar-right">
+    <span class="sub" id="master-updated"></span>
+    <button id="edit-master" class="btn btn-ghost btn-sm" type="button">Éditer le master CV</button>
+  </div>
+</header>
+
+<!-- ---------------------------------------------------------------- -->
+<!-- Générer                                                            -->
+<!-- ---------------------------------------------------------------- -->
+<main class="app" id="view-generate">
+
+  <section class="dossier">
+    <div class="settings-sentence">
+      Génère un CV en
+      <button id="lang" class="chip" type="button" data-value="fr" aria-expanded="false">français<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"></path></svg></button>,
+      mode
+      <button id="mode-toggle" class="chip" type="button" data-value="auto" aria-expanded="false">auto<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"></path></svg></button>,
+      format
+      <button id="format-toggle" class="chip" type="button" data-value="design" aria-expanded="false">design<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"></path></svg></button>,
+      avec le site
+      <button id="website-mode" class="chip" type="button" data-value="none" aria-expanded="false">aucun<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"></path></svg></button>,
+      angle de profil
+      <button id="angle" class="chip" type="button" data-value="auto" aria-expanded="false">auto<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"></path></svg></button>.
+    </div>
+    <p id="mode-hint" class="hint" style="margin-top:-8px"></p>
+
+    <div class="card offer-card">
+      <div class="offer-card-head">
+        <label for="job-offer">Offre d'emploi</label>
+        <span class="sub" id="offer-count">Colle l'offre ici</span>
+      </div>
+      <textarea id="job-offer" placeholder="Colle l'offre ici. Titre, missions, profil : tout ce que tu as."></textarea>
+    </div>
+
+    <div class="run-row">
+      <button id="run" class="btn btn-primary" type="button" disabled>Générer le CV</button>
+      <span id="run-hint" class="hint">Colle une offre pour commencer.</span>
+    </div>
+
+    <div class="card accordion">
+      <div class="accordion-item" id="acc-question">
+        <button class="accordion-head" type="button">
+          <span>Répondre à une question du formulaire</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+        <div class="accordion-body">
+          <span class="sub">Utilise l'offre collée ci-dessus comme contexte.</span>
+          <textarea id="app-question" placeholder="Ex : Pourquoi ce poste vous intéresse-t-il ?" style="min-height:64px"></textarea>
+          <div style="display:flex;align-items:center;gap:12px">
+            <button id="answer-question-btn" class="btn btn-primary btn-sm" type="button">Générer une réponse</button>
+            <span id="answer-msg" class="sub"></span>
+          </div>
+          <div id="answer-box" hidden style="display:flex;flex-direction:column;gap:8px">
+            <textarea id="answer-output" readonly class="tool-output" style="min-height:110px"></textarea>
+            <div style="display:flex;gap:8px">
+              <button id="copy-answer-btn" class="btn btn-ghost btn-sm" type="button">Copier</button>
+              <button id="shorten-answer-btn" class="btn btn-ghost btn-sm" type="button">Plus court</button>
+              <button id="regen-answer-btn" class="btn btn-ghost btn-sm" type="button">Regénérer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" id="acc-letter">
+        <button class="accordion-head" type="button">
+          <span>Rédiger la lettre de motivation</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+        <div class="accordion-body">
+          <span class="sub">À partir de l'offre et du master CV, dans ton style.</span>
+          <textarea id="letter-notes" placeholder="Optionnel : un point à faire apparaître…" style="min-height:52px"></textarea>
+          <div style="display:flex;align-items:center;gap:12px">
+            <button id="letter-btn" class="btn btn-primary btn-sm" type="button">Rédiger la lettre</button>
+            <span id="letter-msg" class="sub"></span>
+          </div>
+          <div id="letter-box" hidden style="display:flex;flex-direction:column;gap:8px">
+            <textarea id="letter-output" class="tool-output" style="min-height:220px"></textarea>
+            <div style="display:flex;gap:8px">
+              <button id="copy-letter-btn" class="btn btn-ghost btn-sm" type="button">Copier</button>
+              <button id="shorten-letter-btn" class="btn btn-ghost btn-sm" type="button">Plus court</button>
+              <button id="regen-letter-btn" class="btn btn-ghost btn-sm" type="button">Regénérer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="results">
+    <div class="card gauge" id="gauge" hidden>
+      <div>
+        <div class="gauge-numbers">
+          <span class="gauge-initial" id="score-initial">—</span>
+          <svg class="gauge-arrow" width="30" height="18" viewBox="0 0 34 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10h28M22 3l8 7-8 7"></path></svg>
+          <span class="gauge-final" id="score-final">—</span>
+          <span class="gauge-scale">/ 100</span>
+        </div>
+        <div class="gauge-track">
+          <div class="gauge-before" id="gauge-before"></div>
+          <div class="gauge-fill" id="gauge-fill"></div>
+        </div>
+      </div>
+      <p class="gauge-just" id="score-justification"></p>
+    </div>
+
+    <div class="card steps is-idle" id="steps-card">
+      <div class="steps-head">
+        <span class="steps-head-title" id="steps-head-title">Pipeline</span>
+        <div class="steps-progress" id="progress" hidden>
+          <span class="sub" id="progress-label"></span>
+          <div class="steps-progress-track"><div class="steps-progress-fill" id="progress-bar"></div></div>
+        </div>
+      </div>
+      <div id="steps"><!-- step rows injected by app.js --></div>
+      <div class="steps-last-run" id="last-run" hidden></div>
+    </div>
+
+    <div class="card preview" id="preview-card" hidden>
+      <div class="preview-head">
+        <div class="download-info">
+          <span class="download-title">Aperçu du CV</span>
+          <span class="sub">Clique sur un texte pour le modifier directement. Les modifications manuelles ne passent pas par la vérification factuelle.</span>
+        </div>
+        <button class="btn btn-blue" id="export-pdf-btn" type="button">Exporter en PDF</button>
+      </div>
+      <p class="hint is-error" id="preview-overflow-warning" hidden>Le contenu dépasse une page — raccourcis le texte avant d'exporter, ou exporte quand même.</p>
+      <iframe id="cv-preview-frame" class="cv-preview-frame" title="Aperçu du CV, modifiable"></iframe>
+    </div>
+
+    <div class="card generations" id="generations" hidden>
+      <div class="generations-head">
+        <span class="generations-title">Dernières générations</span>
+        <span class="sub">L'offre est gardée avec le CV qu'elle a produit.</span>
+      </div>
+      <div id="generations-list"><!-- rows injected by app.js --></div>
+    </div>
+
+    <div class="card download" id="download" hidden>
+      <div class="download-top">
+        <div class="download-info">
+          <span class="download-title">Le CV est prêt</span>
+          <span class="download-name mono" id="download-name"></span>
+        </div>
+        <a class="btn btn-blue" id="download-link" href="#" download>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 4v12M6 11l6 6 6-6M4 20h16"></path></svg>
+          Télécharger le PDF
+        </a>
+      </div>
+      <div class="track-prompt" id="track-prompt">
+        <span class="track-question">As-tu envoyé cette candidature ?</span>
+        <div class="track-actions">
+          <button id="track-yes" class="btn btn-line btn-sm" type="button">Oui, l'ajouter au suivi</button>
+          <button id="track-no" class="btn btn-ghost btn-sm" type="button">Pas encore</button>
+        </div>
+      </div>
+      <p class="track-done" id="track-done" hidden>Ajoutée au suivi ✓</p>
+    </div>
+  </section>
+</main>
+
+<!-- ---------------------------------------------------------------- -->
+<!-- Suivi des candidatures                                             -->
+<!-- ---------------------------------------------------------------- -->
+<main class="tracking" id="view-tracking" hidden>
+  <div class="tracking-head">
+    <div class="tracking-summary" id="tracking-summary">Aucune candidature suivie pour l'instant.</div>
+    <div class="tracking-filters" id="tracking-filters">
+      <button type="button" class="filter-btn is-active" data-filter="all">Toutes</button>
+      <button type="button" class="filter-btn" data-filter="envoyee">Envoyées</button>
+      <button type="button" class="filter-btn" data-filter="refusee">Refusées</button>
+      <button type="button" class="filter-btn" data-filter="acceptee">Acceptées</button>
+    </div>
+  </div>
+  <div class="card applications-list" id="applications-list"></div>
+</main>
+
+<!-- ---------------------------------------------------------------- -->
+<!-- Master CV — right-side panel                                       -->
+<!-- ---------------------------------------------------------------- -->
+<div class="modal" id="master-modal" hidden>
+  <div class="master-panel">
+    <div class="master-head">
+      <div class="master-head-ttl">
+        <span>Master CV</span>
+        <span class="sub" id="master-subtitle">La source de vérité. Tout ce qui n'est pas ici ne peut pas apparaître sur un CV généré.</span>
+      </div>
+      <div class="master-head-right">
+        <div class="seg-control">
+          <button type="button" class="seg is-active" id="tab-json">Structuré</button>
+          <button type="button" class="seg" id="tab-text">Texte libre</button>
+        </div>
+        <button id="master-close" class="btn btn-ghost btn-sm" type="button" aria-label="Fermer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- JSON mode -->
+    <div id="json-panel">
+      <div class="master-side">
+        <div class="master-side-block">
+          <span>Photo</span>
+          <div class="photo-row">
+            <img id="photo-preview" class="photo-avatar" alt="" hidden>
+            <div id="photo-initials" class="photo-avatar">IL</div>
+            <div class="photo-actions">
+              <label class="btn btn-ghost btn-sm photo-upload-btn">Changer<input type="file" id="photo-input" accept="image/*" hidden></label>
+              <button type="button" id="photo-remove" class="btn btn-ghost btn-sm btn-danger" hidden>Retirer</button>
+            </div>
+          </div>
+          <span class="sub">Redimensionnée automatiquement. Format design uniquement.</span>
+        </div>
+        <div class="master-side-block">
+          <span>Champs verrouillés</span>
+          <span class="sub">Préfixe une valeur par <code class="mono" style="color:var(--flag-ink)">[FIXE]</code> : elle est recopiée telle quelle, jamais reformulée.</span>
+          <span class="sub" id="master-locked-count"></span>
+        </div>
+        <div class="master-side-block">
+          <span>Aperçu</span>
+          <span class="sub" id="master-summary"></span>
+        </div>
+      </div>
+      <div class="master-editor">
+        <div class="master-editor-head">
+          <span class="mono sub">master-cv.json</span>
+        </div>
+        <textarea id="master-text" spellcheck="false"></textarea>
+      </div>
+    </div>
+
+    <!-- Texte libre mode -->
+    <div id="freetext-panel" hidden>
+      <textarea id="freetext-input" spellcheck="false" placeholder="Word copié-collé, export LinkedIn, texte brut, peu importe le format."></textarea>
+      <div class="freetext-side">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <button type="button" class="btn btn-blue" id="parse-cv-btn" style="justify-content:center">Structurer avec Claude</button>
+          <span class="sub">Remplace le master structuré. Les champs <code class="mono" style="color:var(--flag-ink)">[FIXE]</code> existants sont conservés.</span>
+        </div>
+        <div style="height:1px;background:var(--border-soft)"></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-weight:600">Ce que Claude va extraire</span>
+          <span class="sub">Identité et contacts, expériences, formations, compétences, langues.</span>
+          <span class="sub">Ce qui n'est pas dans le texte n'est pas inventé.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="master-foot">
+      <p class="modal-msg" id="master-msg"></p>
+      <div style="display:flex;gap:8px">
+        <button type="button" class="btn btn-ghost" id="master-close-2">Annuler</button>
+        <button type="button" class="btn btn-primary" id="master-save">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/app.js"></script>
+</body>
+</html>
